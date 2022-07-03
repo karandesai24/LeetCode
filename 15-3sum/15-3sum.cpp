@@ -1,36 +1,32 @@
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
-        if (nums.size() < 3)
-      return {};
-
-    vector<vector<int>> ans;
-
-    sort(begin(nums), end(nums));
-
-    for (int i = 0; i + 2 < nums.size(); ++i) {
-      if (i > 0 && nums[i] == nums[i - 1])
-        continue;
-      
-      int l = i + 1;
-      int r = nums.size() - 1;
-      while (l < r) {
-        const int sum = nums[i] + nums[l] + nums[r];
-        if (sum == 0) {
-          ans.push_back({nums[i], nums[l++], nums[r--]});
-          while (l < r && nums[l] == nums[l - 1])
-            ++l;
-          while (l < r && nums[r] == nums[r + 1])
-            --r;
-        } else if (sum < 0) {
-          ++l;
-        } else {
-          --r;
+    vector<vector<int>> threeSum(vector<int>& num) {
+             set<vector<int> >rs;
+        sort(num.begin(), num.end());
+        int i, j, k;
+        int n = num.size();
+        for (i = 0; i < n - 2; i++) {
+            j = i+1;
+            k = n-1;
+            while (j < k) {
+                int sum = num[i] + num[j] + num[k];
+                if (sum == 0) {
+                    vector<int> tmp(3);
+                    tmp[0] = num[i];
+                    tmp[1] = num[j];
+                    tmp[2] = num[k];
+                    rs.insert(tmp);
+                    j++;
+                    k--;
+                } else if (sum > 0) {
+                    k--;
+                } else if (sum < 0) {
+                    j++;
+                }
+            }
         }
-      }
-    }
-
-    return ans;
+        vector<vector <int> >result (rs.begin(), rs.end());
+        return result;
         
     }
 };
