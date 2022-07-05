@@ -1,15 +1,16 @@
 class Solution {
 public:
     int pivotIndex(vector<int>& nums) {
-        const int sum = accumulate(begin(nums), end(nums), 0);
-    int prefix = 0;
-
-    for (int i = 0; i < nums.size(); ++i) {
-      if (prefix == sum - prefix - nums[i])
-        return i;
-      prefix += nums[i];
+   int len=nums.size();
+    if(len==1)
+        return nums[0];
+    for(int i=0;i<len;i++){
+            
+          int left=accumulate(nums.begin(),nums.begin()+i,0); 
+          int right=accumulate(nums.begin()+i+1,nums.end(),0);
+          if(left==right)
+              return i;
     }
-
-    return -1;
+      return -1;
     }
 };
