@@ -1,24 +1,19 @@
 class Solution {
 public:
     int romanToInt(string s) {
-        int ans = 0;
-    vector<int> roman(128);
-
-    roman['I'] = 1;
-    roman['V'] = 5;
-    roman['X'] = 10;
-    roman['L'] = 50;
-    roman['C'] = 100;
-    roman['D'] = 500;
-    roman['M'] = 1000;
-
-    for (int i = 0; i + 1 < s.length(); ++i)
-      if (roman[s[i]] < roman[s[i + 1]])
-        ans -= roman[s[i]];
-      else
-        ans += roman[s[i]];
-
-    return ans + roman[s.back()];
+        int res = 0;
+        vector<char> roman{'M', 'D', 'C', 'L', 'X', 'V', 'I'};
+        vector<int> value{1000, 500, 100, 50, 10, 5, 1};
+        unordered_map<char,int> mp;
+        for(int i=0; i<7; i++) mp[roman[i]] = value[i];
+        for(int i=0; i<s.length(); i++){
+            if( i<s.length()-1 && mp[s[i]] < mp[s[i+1]] ){
+                // cases: IV, IX, XL, XC, CD, CM
+                res -= mp[s[i]];
+            } else { // general cases
+                res += mp[s[i]];
+            }
+        } return res;
         
     }
 };
