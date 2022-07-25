@@ -1,4 +1,4 @@
-
+o(n2)
 vector < vector < int >> printAdjacency(int n, int m, vector < vector < int >> & edges) {
     vector<int> adj[n];
     for(int i=0; i<m; i++){
@@ -17,3 +17,13 @@ vector < vector < int >> printAdjacency(int n, int m, vector < vector < int >> &
     }
     return ans;
 }
+
+o(n)
+     vector<vector<int>> adj(n);
+     for(int i = 0; i < n; i++) {
+        adj[i].push_back(i);
+    }
+    for(int i = 0; i < m; i++) {
+        adj[edges[i][0]].push_back(edges[i][1]);
+        adj[edges[i][1]].push_back(edges[i][0]);
+    } return adj;
