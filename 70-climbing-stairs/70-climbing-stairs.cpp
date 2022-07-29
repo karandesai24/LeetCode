@@ -13,6 +13,21 @@ public:
     }
 };
 /*
+class Solution { // Space Optimized
+public:
+    int climbStairs(int n) {
+        if( n < 2 ) return 1;
+        int dp = 0, dp_1 = 1, dp_2 = 1;
+        for(int i=2; i<=n; i++){
+            dp = dp_1 + dp_2;
+            dp_2 = dp_1;
+            dp_1 = dp;
+        } return dp_1;
+    }
+};
+
+*/
+/*
 int countDistinctWayToClimbStair(long long nStairs)
 {
     //base case
