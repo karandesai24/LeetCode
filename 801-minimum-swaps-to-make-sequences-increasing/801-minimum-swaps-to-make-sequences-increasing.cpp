@@ -30,6 +30,8 @@ public:
     }
 };
 /*
+tabulation
+
 int minSwap(vector<int>& nums1, vector<int>& nums2) {
         nums1.insert(nums1.begin(), -1);
         nums2.insert(nums2.begin(), -1);
