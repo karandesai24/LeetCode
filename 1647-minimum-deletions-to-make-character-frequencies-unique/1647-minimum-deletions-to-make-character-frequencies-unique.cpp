@@ -22,6 +22,42 @@ public:
 
 
 /*
+class Solution {
+public:
+    int minDeletions(string s) {
+         unordered_map<char, int> umap;
+        unordered_set<int> visited;
+        
+        for(auto c : s) 
+            umap[c]++;
+        int ans = 0;
+        for(auto m : umap)
+        {
+            while(visited.count(m.second))
+            {
+                m.second--;
+                ans++;
+            }
+            if(m.second) visited.insert(m.second);
+        }
+        return ans;
+       
+    }
+};
+/*
+ int res = 0;
+        unordered_map<char,int> char_mp;
+        for(char ch : s) 
+            char_mp[ch]++;
+        unordered_map<int,int> freq_mp;
+        for(auto iter = char_mp.begin(); iter != char_mp.end(); iter++){
+          
+            while( freq_mp.find(iter->second) != freq_mp.end() ){
+                iter->second--;
+                res++;
+            } if( iter->second ) freq_mp[iter->second]++;
+        } return res;
+    
 
  int minDeletions(string s) {
     vector<int> freq(26);
