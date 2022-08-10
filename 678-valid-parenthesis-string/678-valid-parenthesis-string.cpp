@@ -1,50 +1,14 @@
 class Solution {
 public:
     bool checkValidString(string s) {
-        stack<int> st, st1;
-         int sc = 0; 
+         int maxdiff = 0, mindiff = 0;
+        // diff means left - right
+        for(int i=0; i<s.length(); i++){
+            maxdiff += ( s[i] == '(' || s[i] == '*' ) ? 1 : -1;
+            mindiff += ( s[i] == ')' || s[i] == '*' ) ? -1 : 1;
+            if( maxdiff < 0 ) return false;
+            mindiff = std::max( 0, mindiff);
+        } return mindiff == 0;
         
-        for (int i=0; i<s.length(); i++) {
-            if (s[i] == '(' || s[i] == '*')
-                st.push(s[i]);
-            else
-                if (st.empty())
-                    return false;
-                else {
-                    while (!st.empty() && st.top() == '*') { 
-                        st1.push(st.top());
-                        st.pop();
-                    }
-                    
-                    if (st.empty()) 
-                        st1.pop();
-                    else 
-                        st.pop();
-                    
-                    while (!st1.empty()) { 
-                        st.push(st1.top());
-                        st1.pop();
-                    }
-                }
-        }
-        
-       
-        char c;
-        
-        while (!st.empty()) {
-            c = st.top();
-            st.pop();
-            
-            if (c=='*')
-                sc++;
-            else {
-                if (sc>=1) 
-                    sc--;
-                else 
-                    return false;
-            }
-        }
-        
-        return true;
     }
 };
