@@ -43,3 +43,31 @@ public:
         matrix[i][0] = 0;
     }
 };
+/*
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+         vector<pair<int,int>>zeroIndex;
+        
+        for(int i=0;i<matrix.size();i++){
+             
+            for(int j=0;j<matrix[0].size();j++){
+                
+                if(matrix[i][j]==0){
+                    zeroIndex.push_back({i,j});
+                }
+            }
+                
+        }
+        // now doing the real part
+        for(auto x:zeroIndex){
+            for(int i=0;i<matrix.size();i++){
+                matrix[i][x.second]=0;
+            }
+            for(int j=0;j<matrix[0].size();j++){
+                matrix[x.first][j] = 0;
+            }
+        }
+    }
+};
+*/
