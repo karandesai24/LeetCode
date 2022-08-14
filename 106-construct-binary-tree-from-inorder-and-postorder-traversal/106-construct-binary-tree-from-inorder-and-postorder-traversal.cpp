@@ -11,32 +11,39 @@
  */
 class Solution {
 public:
-    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-         unordered_map<int, int> inToIndex;
-
-    for (int i = 0; i < inorder.size(); ++i)
-      inToIndex[inorder[i]] = i;
-
-    return build(inorder, 0, inorder.size() - 1, postorder, 0,
-                 postorder.size() - 1, inToIndex);
-  }
-
- private:
-  TreeNode* build(const vector<int>& inorder, int inStart, int inEnd,
-                  const vector<int>& postorder, int postStart, int postEnd,
-                  const unordered_map<int, int>& inToIndex) {
-    if (inStart > inEnd)
-      return nullptr;
-
-    const int rootVal = postorder[postEnd];
-    const int rootInIndex = inToIndex.at(rootVal);
-    const int leftSize = rootInIndex - inStart;
-
-    TreeNode* root = new TreeNode(rootVal);
-    root->left = build(inorder, inStart, rootInIndex - 1, postorder, postStart,
-                       postStart + leftSize - 1, inToIndex);
-    root->right = build(inorder, rootInIndex + 1, inEnd, postorder,
-                        postStart + leftSize, postEnd - 1, inToIndex);
-    return root;
+     int search(vector<int> &inorder, int start, int end, int curr)
+    {
+        for(int i=start; i<=end; i++)
+        {
+            if(inorder[i]== curr)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+    int idx;
+    TreeNode* build(vector<int> &inorder, vector<int> &postorder, int start, int end)
+    {
+        if(start > end)
+        {
+            return NULL;
+        }
+        int curr= postorder[idx--];
+        TreeNode* root= new TreeNode(curr);
+        if(start== end)
+        {
+            return root;
+        }
+        int pos= search(inorder, start, end, curr);
+        root->right= build(inorder, postorder, pos+1, end);
+        root->left= build(inorder, postorder, start, pos-1);
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) 
+    {
+        int n= inorder.size();
+        idx= n-1;
+        return build(inorder, postorder, 0, n-1);
     }
 };
