@@ -1,30 +1,23 @@
 class Solution {
 public:
+    int cal(vector<vector<int>> &dp,vector<int> &cuts, int st, int en, int left, int right)
+    {
+        int mn=INT_MAX;
+        if(st>en)
+            return 0;
+        if(dp[st][en]!=-1)
+            return dp[st][en];
+        
+        for(int i=st;i<=en;i++)
+        {
+            mn=min(mn, right-left+cal(dp,cuts, i+1, en, cuts[i], right)+cal(dp,cuts, st, i-1, left, cuts[i]));
+        }
+        
+        return dp[st][en] = mn;
+    }
     int minCost(int n, vector<int>& cuts) {
-        cuts.push_back(0);
-    cuts.push_back(n);
-    sort(begin(cuts), end(cuts));
-
-    // dp[i][j] := minCost(cuts[i..j])
-    dp.resize(cuts.size(), vector<int>(cuts.size()));
-    return minCost(cuts, 0, cuts.size() - 1);
-  }
-
- private:
-  vector<vector<int>> dp;
-
-  int minCost(const vector<int>& cuts, int i, int j) {
-    if (j - i <= 1)
-      return 0;
-    if (dp[i][j])
-      return dp[i][j];
-
-    dp[i][j] = INT_MAX;
-
-    for (int k = i + 1; k < j; ++k)
-      dp[i][j] = min(dp[i][j], cuts[j] - cuts[i] + minCost(cuts, i, k) +
-                                   minCost(cuts, k, j));
-
-    return dp[i][j];
+        sort(cuts.begin(), cuts.end());
+        vector<vector<int>> dp(cuts.size(), vector<int> (cuts.size(), -1));
+        return cal(dp,cuts,0,cuts.size()-1,0,n);
     }
 };
