@@ -30,3 +30,20 @@ public:
 		return ans;
     }
 };
+/*
+ unordered_map<int,int> mp;
+        for(int num : arr) mp[num]++;
+        
+        priority_queue<pair<int,int>, 
+            vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        for(auto iter = mp.begin(); iter != mp.end(); iter++)
+            pq.push(make_pair(iter->second, iter->first));
+      
+        while( k-- > 0 ){
+            pair<int,int> cur = pq.top(); pq.pop();
+            int cur_freq = cur.first, cur_num = cur.second;
+            if( cur_freq > 1 ) pq.push(make_pair(cur_freq - 1, cur_num));
+        }
+        
+        return pq.size();
+	*/
