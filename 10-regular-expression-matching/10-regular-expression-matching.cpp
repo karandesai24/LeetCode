@@ -25,3 +25,46 @@ public:
    
     
 };
+/*
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int m=p.size();
+        int n=s.size();
+        
+        bool t[m+1][n+1];
+        
+        for(int i=0; i<m+1; i++){
+            for(int j=0; j<n+1; j++){
+                if(i==0 && j==0){
+                   t[i][j]=true;
+                }else if(i==0){
+                   t[i][j]=false; 
+                }else if(j==0){
+                   if(p[i-1]=='*'){
+                      t[i][j]=t[i-2][j];  
+                   }else{
+                      t[i][j]=false; 
+                   } 
+                }else{
+                   if(p[i-1]=='*'){
+                      t[i][j]=t[i-2][j];
+                      
+                      if(p[i-2]==s[j-1] || p[i-2]=='.'){
+                         t[i][j]=t[i][j]||t[i][j-1]; 
+                      }
+                   }else if(p[i-1]=='.'){
+                      t[i][j]=t[i-1][j-1]; 
+                   }else if(s[j-1]==p[i-1]){
+                      t[i][j]=t[i-1][j-1]; 
+                   }else{
+                      t[i][j]=false; 
+                   } 
+                }
+            }
+        }
+        
+        return t[m][n];
+    }
+};
+*/
