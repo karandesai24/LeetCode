@@ -67,4 +67,31 @@ public:
         return t[m][n];
     }
 };
+//
+class Solution {
+public:
+    vector<vector<int>> dp;
+    bool fun(string &s,string &p,int i,int j){
+        if(i==0 && j==0)
+            return true;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        if((i>0 && j>0) && (s[i-1]==p[j-1] || p[j-1]=='.'))
+            return dp[i][j]=fun(s,p,i-1,j-1);
+        if(j>0 && (p[j-1]=='*')){
+            if(fun(s,p,i,j-2))
+                return dp[i][j]=true;
+            if((i>0 && j>0) && (s[i-1]==p[j-2] || p[j-2]=='.')){
+                return dp[i][j]=fun(s,p,i-1,j);
+        }
+            }
+        return dp[i][j]=false;
+    }
+    bool isMatch(string s, string p) {
+        int n=s.size(),m=p.size();
+        dp.resize(n+1,vector<int>(m+1,-1));
+        return fun(s,p,n,m);
+    }
+};
+//
 */
